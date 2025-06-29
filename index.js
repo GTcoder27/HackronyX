@@ -23,17 +23,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS configuration
-if (process.env.NODE_ENV === "production") {
-    app.use(cors({
-        origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-        credentials: true,
-    }));
-} else {
-    app.use(cors({
-        origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-        credentials: true,
-    }));
-}
+app.use(cors({
+  origin: 'https://hackronyx-frontend-ajjg.vercel.app', // allow only your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // if you're using cookies or authentication headers
+}));
 
 app.use("/api", modelRoutes);
 
